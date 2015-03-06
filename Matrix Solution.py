@@ -24,28 +24,33 @@ while n < brow:
 		brow_input = raw_input()
 	bmatrix.append([int(num) for num in brow_input.split(",")])
 	n = n + 1
-print "Your first matrix is", amatrix
-print "Your second matrix is", bmatrix
-def multiply(amatrix, bmatrix):
+
+def multiply(a, b):
 	if len(amatrix[0]) != brow:
-		return "You can't multiply these." #makes sure that the matrices are able to be multiplied based on their dimensions
+		return "impossible." #makes sure that the matrices are able to be multiplied based on their dimensions
 	multiplied_matrix = []
 	x = 0 #each of these variables represents horizontal and vertical dimensions for each of the two matrices
 	y = 0
-	z = 0
 	w = 0
+	numbers = []
 	row = []
-	numbers = []
-	while y < brow:
-		numbers.append(amatrix[x[y]] * bmatrix[z[w]])
-		z = z+1
-		y = y+1
-		#supposed to multiply the the numbers that will create the first element in the multiplied matrix
-	numbers = []
-	while len(row) < brow:
-		element = sum(numbers)
-		row.append(element)
-		#this makes the row of the multiplied matrix by putting all the elements in a list
-	multiplied_matrix.append(row)
+	while x < arow:
+		while w < len(bmatrix[0]):
+			while y < brow:
+				mini_element = amatrix[x][y] * bmatrix[y][w]
+				numbers.append(mini_element)
+				y = y + 1
+			row.append(sum(numbers))
+			w = w + 1
+			y = 0
+			numbers = []
+		multiplied_matrix.append(row)
+		row = []
+		x = x + 1
+		y = 0
+		w = 0
+	return multiplied_matrix
 
-
+print "Your first matrix is", amatrix
+print "Your second matrix is", bmatrix
+print "Your multiplied matrix is", multiply(amatrix, bmatrix)
